@@ -1,0 +1,14 @@
+description = "Inicia o fluxo completo de orquestração de pipelines canônico."
+
+prompt = """
+Usuário solicitou iniciar o orquestrador de pipelines para a seguinte tarefa: {{args}}
+
+O Task Orchestrator DEVE ser acionado imediatamente para a Fase 0.
+
+Dicas de uso:
+- Para hotfix: /pipeline --hotfix <tarefa>
+- Para grill mode: /pipeline --grill <tarefa>
+- Para review only: /pipeline --review-only <tarefa>
+
+Detecte flags no texto do argumento (--hotfix, --grill, --review-only) e aplique o comportamento correspondente.
+"""

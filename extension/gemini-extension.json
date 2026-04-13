@@ -1,0 +1,88 @@
+{
+  "name": "pipeline-orchestrator",
+  "version": "1.3.0",
+  "description": "Orquestrador de Pipelines Canônico com Confidence Scoring e 15-Agent Architecture (Gemini CLI).",
+  "author": "Fernando Xavier",
+  "agents": [
+    {
+      "id": "task-orchestrator",
+      "path": "agents/task-orchestrator.md",
+      "description": "Entrada obrigatória para classificação e roteamento (Fase 0a)."
+    },
+    {
+      "id": "context-classifier",
+      "path": "agents/context-classifier.md",
+      "description": "Classificador de complexidade e domínios (Fase 0a)."
+    },
+    {
+      "id": "orchestrator-documenter",
+      "path": "agents/orchestrator-documenter.md",
+      "description": "Seleciona pipeline e entrega instruções ao executor (Fase 0b-1)."
+    },
+    {
+      "id": "architect-interrogator",
+      "path": "agents/architect-interrogator.md",
+      "description": "Interrogador de Design para tarefas COMPLEXAS (Fase 1)."
+    },
+    {
+      "id": "executor-controller",
+      "path": "agents/executor-controller.md",
+      "description": "Orquestra execução em batches adaptativos (Fase 2)."
+    },
+    {
+      "id": "executor-implementer-task",
+      "path": "agents/executor-implementer-task.md",
+      "description": "Engine de implementação com TDD e vertical slices (Fase 2)."
+    },
+    {
+      "id": "executor-spec-reviewer",
+      "path": "agents/executor-spec-reviewer.md",
+      "description": "Revisor de conformidade com spec por task (Fase 2)."
+    },
+    {
+      "id": "executor-quality-reviewer",
+      "path": "agents/executor-quality-reviewer.md",
+      "description": "Revisor de qualidade SOLID/KISS/DRY/YAGNI por task (Fase 2)."
+    },
+    {
+      "id": "adversarial-reviewer",
+      "path": "agents/adversarial-reviewer.md",
+      "description": "Revisor Adversarial com Blind Review (Fase 3)."
+    },
+    {
+      "id": "sanity-checker",
+      "path": "agents/sanity-checker.md",
+      "description": "Verificações de sanidade proporcionais ao nível (Fase 3)."
+    },
+    {
+      "id": "final-validator",
+      "path": "agents/final-validator.md",
+      "description": "Validador Final (Pá de Cal) com Go/No-Go (Fase 3)."
+    },
+    {
+      "id": "finishing-branch",
+      "path": "agents/finishing-branch.md",
+      "description": "Opções de finalização de branch: merge/PR/keep/discard (Fase 3)."
+    },
+    {
+      "id": "quality-gate-router",
+      "path": "agents/quality-gate-router.md",
+      "description": "Gera cenários de teste em linguagem natural para aprovação do usuário (Fase 2 TDD)."
+    },
+    {
+      "id": "pre-tester",
+      "path": "agents/pre-tester.md",
+      "description": "Converte cenários aprovados em testes automatizados RED phase (Fase 2 TDD)."
+    },
+    {
+      "id": "final-adversarial-orchestrator",
+      "path": "agents/final-adversarial-orchestrator.md",
+      "description": "Revisão adversarial final independente — opt-in (Fase 3)."
+    }
+  ],
+  "commands": [
+    {
+      "path": "commands/pipeline.toml"
+    }
+  ]
+}
