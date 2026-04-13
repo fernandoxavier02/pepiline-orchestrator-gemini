@@ -1,7 +1,14 @@
-description = "Inicia o Pipeline Orchestrator (SSOT: No Spec, No Code)"
+description = "Inicia o fluxo completo de orquestração de pipelines canônico."
 
 prompt = """
-Atue como o Orchestrator. Sua tarefa é executar o Pipeline para a feature especificada nos argumentos.
-Use a ferramenta Bash para executar o seguinte comando:
-python3 /Users/fernandocostaxavier/.gemini/hooks/slash_commands.py /pipeline {{args}}
+Usuário solicitou iniciar o orquestrador de pipelines para a seguinte tarefa: {{args}}
+
+O Task Orchestrator DEVE ser acionado imediatamente para a Fase 0.
+
+Dicas de uso:
+- Para hotfix: /pipeline --hotfix <tarefa>
+- Para grill mode: /pipeline --grill <tarefa>
+- Para review only: /pipeline --review-only <tarefa>
+
+Detecte flags no texto do argumento (--hotfix, --grill, --review-only) e aplique o comportamento correspondente.
 """
