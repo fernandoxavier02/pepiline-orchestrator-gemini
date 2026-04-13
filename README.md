@@ -181,30 +181,78 @@ The orchestrator supports **8 pipeline types** with **2 intensity levels** each:
 
 ## Installation
 
-### Option 1: Symlink (recommended)
+### Prerequisites
+
+- [Gemini CLI](https://github.com/google-gemini/gemini-cli) installed and configured
+- `~/.gemini/` directory exists
+
+### Option 1: Automated (recommended)
 
 ```bash
 git clone https://github.com/fernandoxavier02/pepiline-orchestrator-gemini.git
 cd pepiline-orchestrator-gemini
-
-ln -s "$(pwd)/extension" ~/.gemini/extensions/pipeline-orchestrator
+chmod +x install.sh
+./install.sh
 ```
 
-### Option 2: Copy
+The installer copies files to two locations:
+
+| What | Where |
+|------|-------|
+| Extension (agents, skills, commands, manifest) | `~/.gemini/extensions/pipeline-orchestrator/` |
+| Shared references (checklists, gates, pipelines) | `~/.gemini/skills/pipeline/references/` |
+
+> **Why two locations?** The agents load reference files at runtime via `cat ~/.gemini/skills/pipeline/references/...`. This is required by the Gemini CLI mega-prompt pattern — agents need these files to make decisions about pipeline type, security checklists, and gate criteria.
+
+### Option 2: Symlink
 
 ```bash
 git clone https://github.com/fernandoxavier02/pepiline-orchestrator-gemini.git
 cd pepiline-orchestrator-gemini
 
-cp -R extension ~/.gemini/extensions/pipeline-orchestrator
+# Extension
+ln -s "$(pwd)/extension" ~/.gemini/extensions/pipeline-orchestrator
+
+# References (required — agents won't work without these)
+mkdir -p ~/.gemini/skills/pipeline
+ln -s "$(pwd)/extension/references" ~/.gemini/skills/pipeline/references
+```
+
+### Option 3: Manual copy
+
+```bash
+git clone https://github.com/fernandoxavier02/pepiline-orchestrator-gemini.git
+cd pepiline-orchestrator-gemini
+
+# Extension
+cp -R extension/ ~/.gemini/extensions/pipeline-orchestrator/
+
+# References
+mkdir -p ~/.gemini/skills/pipeline
+cp -R extension/references/ ~/.gemini/skills/pipeline/references/
 ```
 
 ### Verify Installation
 
 ```bash
-ls ~/.gemini/extensions/pipeline-orchestrator/gemini-extension.json  # Should exist
-ls ~/.gemini/extensions/pipeline-orchestrator/agents/ | wc -l        # Should be 15
-ls ~/.gemini/extensions/pipeline-orchestrator/skills/ | wc -l        # Should be 15
+# Extension manifest
+ls ~/.gemini/extensions/pipeline-orchestrator/gemini-extension.json  # Must exist
+
+# Agents (should be 15)
+ls ~/.gemini/extensions/pipeline-orchestrator/agents/*.md | wc -l
+
+# Skills (should be 31 — 15 core + 16 domain-specific)
+ls ~/.gemini/extensions/pipeline-orchestrator/skills/*.md | wc -l
+
+# References (should be ~24)
+find ~/.gemini/skills/pipeline/references -name "*.md" | wc -l
+```
+
+### Uninstall
+
+```bash
+chmod +x uninstall.sh
+./uninstall.sh
 ```
 
 ## Usage
